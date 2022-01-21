@@ -1,0 +1,320 @@
+git help
+git help commit u otros comandos...
+git config --global user.name "Isaac Sanchez"
+git config --global user.email "idsm_2000@hotmail.com"
+git config --global -e (Permite ver lo que haz hecho hasta el momento)
+Estando dentro de ese menu, puedes presionar "A" y hacer las modificaciones
+
+Para salir de ese menu, apretar tecla Esc + : + wq!
+----------------
+cd c:\Users\isaasanchez\Desktop\Curso-git\01-bases\01-bases
+git init
+git status
+git add .
+git reset Nombre del archivo
+git commit -m "Mensaje commit"
+
+git checkout -- .   (Recupera tu ultimo commit y te lo pone en pantalla, es local)
+git branch (Muestra la rama en la que estan trabajando)
+
+--------> Siempre trabajar en ramas y evitar trabajar en el master
+git branch -m master main (Cambiar nombre de la rama a main) en el repo actual
+------> Para cambiar todos los repositorios nuevos a un nuevo nombre de rama sin hacer nada
+git config --global init.defaultBranch main (Siendo main el nombre de la nueva rama default)
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+
+README.md
+----------------> md significa markdown, sirve para colocar informacion visual en paginas, al entrar se vera un formato HTML
+Recordatorio:
+it add . (Para agregar)
+git reset README.md (Para remover)
+
+IMPORTANTE!!! ------ Manten tus commits en ingles
+
+Para hacer commit y add al mismo tiempo, usar el siguiente comando
+git commit -am "Mensaje de commit" (Esto solo funciona con los archivos que ya estan en seguimiento git y recibieron cmabios, no con los nuevos)
+
+git logs (ver los commits hechos ) :q para salir
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+
+git add *.html (Agregara solo los archivos que son de la extension HTML)
+git add js/*.js (Agregara solo los archivos que son de la extension js de la carpeta especificada)
+
+Si se crea un folder sin nada de datos, git lo ignora
+para evitar que git ignore un folder vacio, debe de agregarsele un .gitkeep
+
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+
+git status --short (Lo mismo que status pero comprimido)
+o creando aliases
+git config --global alias.s "status --short" (s viene siendo un atajo de ahora en adelante y el comando status --short es lo que s va a hacer de ahora en adelante)
+si no funciona, usar  git config --global -e y luego usar tecla "a" para modificar, para salir usar esq + : + wq!
+
+para un log pequeño, usar:
+git log --oneline
+    o puedes usar este command de alias para que se vea bonito
+git config --global alias.lg "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+y ahora usar git lg
+
+Solo se pueden usar aliases que sean unicos y que no choquen con commandos propios de git
+
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+
+git diff ---> nos muestra los cambios que hemos hecho con los anteriores
+git diff --staged -------->nos muestra cambios del staged section
+
+---------> Para corregir un commit mal escrito
+git commit -am "Instalaciones actializadas"
+git commit --amend -m "Actializacion de curso"
+IMPORTANTE, solo funciona para el ultimo commit
+
+Para modificar los archivos commited en git y agregar mas archivos o menos archivos, usar:
+git reset --soft HEAD^ (Elimina el commit anterior)
+
+-----------------> HEAD solo indica al ultimo commit, pero se puede especificar a donde apuntar
+como ejemplo:
+----------------------------------------------------------------------------
+PS C:\Users\isaasanchez\Desktop\Curso-git\04-material-heroes> git lg
+* c9968ad - (16 seconds ago) Agregamos a linterna verde - Isaac Sanchez (HEAD -> main)
+* 7ccfe69 - (5 minutes ago) Agregamos la historia de Batman y Superman - Isaac Sanchez
+* aaf63b6 - (6 minutes ago) Agregamos ciudades.md - Isaac Sanchez
+* e55a95c - (6 minutes ago) Agregamos heroes.md - Isaac Sanchez
+* c5bfd46 - (7 minutes ago) Agregamos misiones.md - Isaac Sanchez
+* 0b10a43 - (7 minutes ago) Readme agregado - Isaac Sanchez
+--------------------------------------------------------------------------------
+Podemos usar el Hash 7ccfe69 para apuntar las modificaciones archivo
+git reset --soft 7ccfe69
+ Y entonces ya podriamos hacer los cambios correspondientes
+ git commit -am "Robin y Linterna Verde"
+
+
+git reset --mixed aaf63b6(Saca todo del stage y permite hacer los cambios que le queramos añadir del hash especificado)
+
+git reset --hard aaf63b6 (Este es destructivo, devolvera el repo a como estaba hasta este commit)
+
+git reset --hard HEAD^ (Elimina el mensaje de commit y los archivos)
+
+ (Muestra el historial de todo lo que se ha hecho, incluso las eliminaciones)
+Ejemplo:
+*****************************************************************
+c5bfd46 (HEAD -> main) HEAD@{0}: reset: moving to HEAD^
+e55a95c HEAD@{1}: reset: moving to e55a95c
+aaf63b6 HEAD@{2}: reset: moving to aaf63b6
+aaf63b6 HEAD@{3}: reset: moving to aaf63b6
+505f282 HEAD@{4}: commit: Robin y Linterna Verde
+7ccfe69 HEAD@{5}: reset: moving to 7ccfe69
+c9968ad HEAD@{6}: commit: Agregamos a linterna verde
+7ccfe69 HEAD@{7}: commit (amend): Agregamos la historia de Batman y Superman
+84e7e58 HEAD@{8}: commit: Agregamos carpeta historia
+aaf63b6 HEAD@{9}: commit: Agregamos ciudades.md
+e55a95c HEAD@{10}: commit: Agregamos heroes.md
+c5bfd46 (HEAD -> main) HEAD@{11}: commit: Agregamos misiones.md
+0b10a43 HEAD@{12}: commit (initial): Readme agregado
+****************************************************************
+git reset --hard 505f282 (Nos devolvera todo lo que borramos hasta el punto 505f282)
+
+--------------------
+git mv destruir-mundo.md salvar-mundo.md (mv mueve un archivo a otro lado y aparte le especificamos cambio de nombre en la misma orden)
+
+git rm salvar-mundo.md (rm elimina archivos especificados)
+pero si se usa git reset --hard regresara el archivo
+para borrarlo definitivamente, debemos de hacer un commit
+
+
+-------------------------
+.gitignore 
+es el archivo donde ignora archivos que esten
+ escritos en el archivoEstos no van a ser subidos al repositorio.
+-------------------------
+
+
+***********************************************************************************************
+*******************TAREA****************************************************************************
+***********************************************************************************************
+git add -A es igual a git add .
+
+IMPORTANTE!!! --- Recupera tus archivos despues de borrarlos
+git checkout -- .   (Recupera tu ultimo commit y te lo pone en pantalla, es local)
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+------------> Creando ramas
+git branch rama-villanos (Crea una nueva rama, pero aun no nos movemos a esa rama)
+git checkout rama-villanos (Nos mueve a la rama especificada)
+
+
+------------> Uniendo ramas con el master
+debes de estar parado en la rama que quieres que reciba los cambios
+si queremos que el  master reciba datos de otras ramas, entonces, habra que movernos a master y jalar los datos de la rama
+
+git checkout master (Nos mueve a la rama especificada)
+git branch (Cofirma donde estamos)
+git merge rama-villanos (merge combina la rama con el master o donde te encuentres)
+
+Para borrar la rama que ya no se usa, utilizar el comando -d
+git branch -d rama-villanos
+
+Para borrar de manera forzada utilizar el commando
+git branch -d rama-villanos -f
+
+--------------------------------------------------------
+Para crear y moverse a la rama en una sola linea, se usa este commando
+git checkout -b rama-villanos (rama-villanos)
+-----> comprueba tu nueva ubicacion
+git branch
+
+-----> depues de hace r cambios en master, puedes unir tu branch con master usando
+git merge rama-villanos (Con merge con la branch especificada)
+
+unificar ramas con conflicto aceptado los cambios o modificando a mano.
+hacer git commit y listo
+--------------------------------------------------------------
+Para crear tags o nombres de releases, se usa el siguiente comando:
+git tag super-release (Siendo super-release el nombre de la version)
+
+-----> para borrar tags, usar el siguiente comando
+git tag -d super-release
+
+-----> para agregar un tag con su numero de version
+git tag -a v1.0.0 -m "Version Lista" (siendo v la version y los datos "" son el comentario de la version)
+
+---> para agregar un tag a un commit anterior
+usar git log y usar el hash
+git tag -a v0.1.0 6b76252 -m "Version Alpha de nuestra app"(dar un numero de version anterior, su hash, y el comentario del commit)
+
+----> para ver mas informacion de un tag, usar el siguiente commando
+git show v1.0.0 (solo especificar la version)
+
+****************************************************************************
+****************************************************************************
+Para guaardar cambios a un projectos, pero por un momento 
+guardarlos temporalmente pararegresar a una version anterior
+se usa 
+git stash
+
+------------> Para ver las referencias de los stash
+git stash list
+------------> para unir los cambios de stash con master, usar
+git stash pop
+-----------------------------------------------
+
+git stash clear (Elimina todos los stash sin preguntar pero aun estara en el reflog)
+
+para ver todos nuestros stash, recuerda usar 
+git stash list
+------------------------------------------------------------
+stash@{0}: WIP on master: 9573098 Conflictos resueltos
+stash@{1}: WIP on master: 9573098 Conflictos resueltos
+stash@{2}: WIP on master: 9573098 Conflictos resueltos
+------------------------------------------------------------
+-----------> para ingresar a alguno de los stash disponibles usar
+git stash apply stash@{2} (Este ingresa a un stash que queramos por parametro)
+
+--------> para borrar stash, se usa el siguiente comando
+git stash drop stash@{2} (Con la referencia del stash que queremos eliminar o directo)
+git stash drop (Este elimina el ultinmo stash creado)
+
+-------> para ver los contenidos de un stash, usar 
+git stash show stash@{1} (Especificando que stash queremos ver)
+
+--------> para guardar stash con detalles, usar
+git stash save "Agregamos a loki en villanos" (Especificando el mensaje del stash)
+podemos ver los datos con git stash list
+
+--------> para ver mas detalles de los stats
+git stash list --stat
+
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+Rebase
+
+para hacer rebase, hay que asegurarno en que rama estamos
+para que ahi se hagan los cambios
+
+git rebase master (Master o la branch que queramos mover y arreglar sobre la actual rama donde estamos)
+ya despues podemos usar
+git merge rama-misiones-cpmpletadas (con la rama que queremos usar)
+
+ya se puede borrar la rama congit branch -d rama-misiones-completadas
+
+-----------------------------------------
+----> rebase interactivo
+git rebase -i HEAD~4 (-i es interactivo y HEAD~4 indica que queremos ir 4 commits abajo)
+apareceran muchas cosas, aqui usaremos squash para fusionar unir 2 commits
+Muy complicado!!!
+
+-------
+tambien esta rename, usar este para cambiar los commits
+
+-------
+
+
+***********************************************************************************************
+***********************************************************************************************
+***********************************************************************************************
+configuracion de Github una vez creado el repo en github
+
+-------------> este es cuando ya existe un historial de versiones en local
+git remote add origin https://github.com/sanchez-Isaac/repo-temporal.git
+git branch -M main
+git push -u origin main
+---------------------------------
+
+Para subir los tags creados a github se tiene que hacer de forma manual
+git push --tags
+
+-----------------
+Para actualizar los datos de mi computadora desde github usar
+git pull
+git pull origin master (Para jalar datos de una branch, especificar el nombre, en este caso master)
+----------
+para evitar errores usar
+git config --global pull.ff only
+git config --global -e (Para ver la configuracion actual)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
